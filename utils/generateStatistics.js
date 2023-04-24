@@ -1,4 +1,4 @@
-function generateStatistics(originalUrl,shortUrl) {
+function generateStatistics(originalUrl, shortUrl) {
   const originalUrlBytes = getStringSize(originalUrl);
   const shortUrlBytes = getStringSize(shortUrl);
   const createdAt = new Date().toISOString();
@@ -7,9 +7,8 @@ function generateStatistics(originalUrl,shortUrl) {
     shortUrlBytes,
     createdAt,
     visited: 0,
-  }
+  };
 }
-
 
 function getStringSize(str) {
   const encoder = new TextEncoder();

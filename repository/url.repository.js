@@ -1,11 +1,11 @@
-class UrlRepo{
- urlStore = {};
-  
-   saveOne(originalUrl,shortUrl,statistics) {
-     this.urlStore[shortUrl] = { originalUrl, statistics };
-     return shortUrl;
-   }
-  
+class UrlRepo {
+  urlStore = {};
+
+  saveOne(originalUrl, shortUrl, statistics) {
+    this.urlStore[shortUrl] = { originalUrl, statistics };
+    return shortUrl;
+  }
+
   getOne(shortUrl) {
     if (!this.urlStore[shortUrl]) return null;
 
@@ -14,11 +14,9 @@ class UrlRepo{
   }
 
   getStatistics(shortUrl) {
-     if (!this.urlStore[shortUrl]) return null;
+    if (!this.urlStore[shortUrl]) return null;
     return this.urlStore[shortUrl].statistics;
   }
-
-  
 }
 
 module.exports = UrlRepo;

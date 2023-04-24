@@ -1,6 +1,6 @@
-const app = require('../app');
+const app = require("../app");
 
-const request = require('supertest');
+const request = require("supertest");
 
 let server;
 beforeAll(() => {
@@ -11,64 +11,60 @@ afterAll((done) => {
   server.close(done); // close the server
 });
 
-describe('Test the encode path', () => {
-  test('It should respond with a 422 status code when no data is provided', (done) => {
-   request(app)
-      .post('/encode')
-      .then(response => {
+describe("Test the encode path", () => {
+  test("It should respond with a 422 status code when no data is provided", (done) => {
+    request(app)
+      .post("/encode")
+      .then((response) => {
         expect(response.statusCode).toBe(422);
         done();
       });
   });
 
-  test('It should respond with a 200 status code when a valid URL is provided', (done) => {
-   request(app)
-      .post('/encode')
-      .send({ url: 'https://www.google.com' })
-      .then(response => {
+  test("It should respond with a 200 status code when a valid URL is provided", (done) => {
+    request(app)
+      .post("/encode")
+      .send({ url: "https://www.google.com" })
+      .then((response) => {
         expect(response.statusCode).toBe(200);
         done();
       });
   });
 });
- 
 
-describe('Test the decode path', () => {
+describe("Test the decode path", () => {
   let shortId;
 
   beforeAll((done) => {
     request(app)
-      .post('/encode')
+      .post("/encode")
       .send({
-        url: 'https://www.google.com',
+        url: "https://www.google.com",
       })
       .end((err, res) => {
         if (err) {
-         done(err);
+          done(err);
         }
-        shortId = res.body.shortUrl.split('/').pop();
-       done();
+        shortId = res.body.shortUrl.split("/").pop();
+        done();
       });
   });
 
-  test('It should response the GET method', (done) => {
+  test("It should response the GET method", (done) => {
     request(app)
-      .get('/decode/123456')
-      .then(response => {
+      .get("/decode/123456")
+      .then((response) => {
         expect(response.statusCode).toBe(404);
         done();
       });
   });
 
- 
-  test('It should response the GET method', (done) => {
-    request(app).get(`/decode/${shortId}`).
-      then(response => {
+  test("It should response the GET method", (done) => {
+    request(app)
+      .get(`/decode/${shortId}`)
+      .then((response) => {
         expect(response.statusCode).toBe(200);
         done();
       });
   });
-
-  
-
 });
