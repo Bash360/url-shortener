@@ -10,10 +10,6 @@ const encode = [body('url').isURL().withMessage('invalid URL'), validateResult,
   async (req, res, next)=>{
     try {
       const { url } = req.body;
-      const urlExists = ShortUrlRepo.exists(url);
-      if (urlExists) {
-        return res.status(400).json({ message: 'URL exist' });
-      }
 
       const originalURL = url;
       const shortURL = generateURL();
