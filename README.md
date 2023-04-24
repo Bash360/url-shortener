@@ -38,7 +38,7 @@ Mark Bashir
 - run git clone <https://github.com/Bash360/url-shortener>
 - run npm install to install dependencies
 - run test with: npm run test
-- to start application : npm run dev, server it listens on port 3000
+- to start application : npm run dev, server listens on port 3000
 
 
 # Endpoints
