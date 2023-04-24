@@ -13,7 +13,8 @@ class UrlRepo{
     return this.urlStore[shortUrl].originalUrl;
   }
 
-  getStatistics(shortUrl){
+  getStatistics(shortUrl) {
+     if (!this.urlStore[shortUrl]) return null;
     return this.urlStore[shortUrl].statistics;
   }
 

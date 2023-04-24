@@ -34,19 +34,19 @@ const decode = [param('shortUrl').isString().withMessage('invalid short URL'), v
     try {
       const { shortUrl } = req.params;
       const originalUrl = ShortUrlRepo.getOne(shortUrl);
-      if (!originalUrl) return res.status(404).json({ message: 'URL not found' });
+    if (!originalUrl) return res.status(404).json({ message: 'short URL Path not found' });
       return res.status(200).json({ originalUrl });
     }catch(err){
       next(err);
     }
   }];
 
-const getStatistics = [param('shortUrl').isString().withMessage('invalid short URL'), validateResult,
+const getStatistics = [param('shortUrl').isString().withMessage('invalid short URL path'), validateResult,
   async (req, res, next) => {
     try {
       const { shortUrl } = req.params;
       const statistics = ShortUrlRepo.getStatistics(shortUrl);
-      if (!statistics) return res.status(404).json({ message: 'URL not found' });
+      if (!statistics) return res.status(404).json({ message: 'short URL Path not found' });
       return res.status(200).json(statistics);
     } catch (err) {
       next(err);
@@ -57,7 +57,7 @@ const goto = [param('shortUrl').isString().withMessage('invalid short URL'), val
   async (req, res, next) => {
     const { shortUrl } = req.params;
     const originalUrl = ShortUrlRepo.getOne(shortUrl);
-    if (!originalUrl) return res.status(404).json({ message: 'URL not found' });
+    if (!originalUrl) return res.status(404).json({ message: 'short URL Path not found' });
     return res.redirect(originalUrl);
   }
 ];
