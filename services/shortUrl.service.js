@@ -1,9 +1,8 @@
 const { body, param } = require("express-validator");
 const validateResult = require("../middleware/validator");
 const UrlRepo = require("../repository/url.repository");
-const generateURL = require("../utils/generateShortURL");
+const generateRandomChar = require("../utils/generateRandomChar");
 const generateStatistics = require("../utils/generateStatistics");
-const { async } = require("jshint/src/prod-params");
 
 const ShortUrlRepo = new UrlRepo();
 const encode = [
@@ -14,15 +13,15 @@ const encode = [
       const { url } = req.body;
 
       const originalURL = url;
-      const shortURL = generateURL();
-      const statistics = generateStatistics(originalURL, shortURL);
-      const savedShortUrl = ShortUrlRepo.saveOne(
+      const randomChar = generateRandomChar();
+      const statistics = generateStatistics(originalURL, randomChar);
+      const savedRandomChar = ShortUrlRepo.saveOne(
         originalURL,
-        shortURL,
+        randomChar,
         statistics
       );
       const baseUrl = `${req.protocol}://${req.get("host")}/`;
-      return res.status(201).json({ shortUrl: `${baseUrl}${savedShortUrl}` });
+      return res.status(201).json({ shortUrl: `${baseUrl}${savedRandomChar}` });
     } catch (err) {
       next(err);
     }

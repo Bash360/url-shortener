@@ -1,4 +1,4 @@
-function generateShortURL(length = 6) {
+function generateRandomChar(length = 6) {
   let result = "";
   const base62Chars =
     "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -9,4 +9,4 @@ function generateShortURL(length = 6) {
   return result;
 }
 
-module.exports = generateShortURL;
+module.exports = generateRandomChar;

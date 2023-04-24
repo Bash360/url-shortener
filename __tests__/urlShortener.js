@@ -26,7 +26,7 @@ describe("Test the encode path", () => {
       .post("/encode")
       .send({ url: "https://www.google.com" })
       .then((response) => {
-        expect(response.statusCode).toBe(200);
+        expect(response.statusCode).toBe(201);
         done();
       });
   });
