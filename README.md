@@ -37,6 +37,7 @@ Mark Bashir
 - open your terminal or cmd
 - run git clone <https://github.com/Bash360/url-shortener>
 - run npm install to install dependencies
+- create a .env file in root folder i.e "URL-SHORTENER/" add NODE_ENV=development
 - run test with: npm run test
 - to start application : npm run dev, server listens on port 3000
 
