@@ -3,9 +3,9 @@
 
 
 - /encode - Encodes a URL to a shortened URL
-- /decode/{url_path} - Decodes a shortened URL to its original URL
-- /statistic/{url_path} - Return basic stat of a short URL path.
-- /{url_path} - Redirects to Original URL
+- /decode/{short_url_path} - Decodes a shortened URL to its original URL
+- /statistic/{short_url_path} - Return basic stat of a short URL path.
+- /{short_url_path} - Redirects to Original URL
 
 
 # creators Mark Bashir
