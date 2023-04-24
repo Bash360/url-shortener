@@ -8,6 +8,8 @@ class UrlRepo{
   
   getOne(shortUrl) {
     if (!this.urlStore[shortUrl]) return null;
+
+    this.urlStore[shortUrl].statistics.visited += 1;
     return this.urlStore[shortUrl].originalUrl;
   }
 

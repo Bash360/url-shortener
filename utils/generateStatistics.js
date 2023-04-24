@@ -5,7 +5,8 @@ function generateStatistics(originalUrl,shortUrl) {
   return {
     originalUrlBytes,
     shortUrlBytes,
-    createdAt
+    createdAt,
+    visited: 0,
   }
 }
 
