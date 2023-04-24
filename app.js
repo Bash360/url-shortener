@@ -8,6 +8,7 @@ app.disable('x-powered-by');
 app.use('/', [urlRoutes]);
 
 const PORT = process.env.PORT || 3000;
+console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === "development") {
   app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
