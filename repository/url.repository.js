@@ -15,3 +15,5 @@ class UrlRepo{
   }
 
 }
+
+module.exports = UrlRepo;
