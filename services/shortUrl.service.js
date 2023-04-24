@@ -3,6 +3,7 @@ const validateResult = require('../middleware/validator');
 const UrlRepo = require('../repository/url.repository');
 const generateURL = require('../utils/generateShortURL');
 const generateStatistics = require('../utils/generateStatistics');
+const { async } = require('jshint/src/prod-params');
 
 
 const ShortUrlRepo = new UrlRepo();
@@ -34,7 +35,7 @@ const decode = [param('shortUrl').isString().withMessage('invalid short URL'), v
       const { shortUrl } = req.params;
       const originalUrl = ShortUrlRepo.getOne(shortUrl);
       if (!originalUrl) return res.status(404).json({ message: 'URL not found' });
-      return res.redirect(originalUrl);
+      return res.status(200).json({ originalUrl });
     }catch(err){
       next(err);
     }
@@ -52,5 +53,13 @@ const getStatistics = [param('shortUrl').isString().withMessage('invalid short U
     }
   }];
 
+const goto = [param('shortUrl').isString().withMessage('invalid short URL'), validateResult,
+  async (req, res, next) => {
+    const { shortUrl } = req.params;
+    const originalUrl = ShortUrlRepo.getOne(shortUrl);
+    if (!originalUrl) return res.status(404).json({ message: 'URL not found' });
+    return res.redirect(originalUrl);
+  }
+];
 
-module.exports = { encode,decode,statistics:getStatistics };
+module.exports = { encode,decode,statistics:getStatistics,goto };
