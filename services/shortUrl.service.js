@@ -15,7 +15,8 @@ const encode = [body('url').isURL().withMessage('invalid URL'), validateResult,
       const shortURL = generateURL();
       const statistics = generateStatistics(originalURL, shortURL);
       const savedShortUrl = ShortUrlRepo.saveOne(originalURL, shortURL, statistics);
-      return res.status(200).json({ shortUrl: savedShortUrl });
+      const baseUrl = `${req.protocol}://${req.get('host')}/`;
+      return res.status(200).json({ shortUrl: `${baseUrl}${savedShortUrl}` });
     
 
     }catch(err){
@@ -27,4 +28,29 @@ const encode = [body('url').isURL().withMessage('invalid URL'), validateResult,
   }];
 
 
-module.exports = { encode };
+const decode = [param('shortUrl').isString().withMessage('invalid short URL'), validateResult,
+  async (req, res, next)=>{
+    try {
+      const { shortUrl } = req.params;
+      const originalUrl = ShortUrlRepo.getOne(shortUrl);
+      if (!originalUrl) return res.status(404).json({ message: 'URL not found' });
+      return res.redirect(originalUrl);
+    }catch(err){
+      next(err);
+    }
+  }];
+
+const getStatistics = [param('shortUrl').isString().withMessage('invalid short URL'), validateResult,
+  async (req, res, next) => {
+    try {
+      const { shortUrl } = req.params;
+      const statistics = ShortUrlRepo.getStatistics(shortUrl);
+      if (!statistics) return res.status(404).json({ message: 'URL not found' });
+      return res.status(200).json(statistics);
+    } catch (err) {
+      next(err);
+    }
+  }];
+
+
+module.exports = { encode,decode,statistics:getStatistics };
