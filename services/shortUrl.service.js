@@ -22,7 +22,7 @@ const encode = [
         statistics
       );
       const baseUrl = `${req.protocol}://${req.get("host")}/`;
-      return res.status(200).json({ shortUrl: `${baseUrl}${savedShortUrl}` });
+      return res.status(201).json({ shortUrl: `${baseUrl}${savedShortUrl}` });
     } catch (err) {
       next(err);
     }
