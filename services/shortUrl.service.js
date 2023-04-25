@@ -16,11 +16,7 @@ const encode = [
       const randomChar = generateRandomChar();
       const shortUrl = `${req.protocol}://${req.get("host")}/${randomChar}`;
       const statistics = generateStatistics(originalURL, shortUrl);
-      const savedRandomChar = ShortUrlRepo.saveOne(
-        originalURL,
-        randomChar,
-        statistics
-      );
+      ShortUrlRepo.saveOne(originalURL, randomChar, statistics);
 
       return res.status(201).json({ shortUrl });
     } catch (err) {
