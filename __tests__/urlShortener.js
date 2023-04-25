@@ -21,7 +21,7 @@ describe("Test the encode path", () => {
       });
   });
 
-  test("It should respond with a 200 status code when a valid URL is provided", (done) => {
+  test("It should respond with a 201 status code when a valid URL is provided", (done) => {
     request(app)
       .post("/encode")
       .send({ url: "https://www.google.com" })
@@ -50,7 +50,7 @@ describe("Test the decode path", () => {
       });
   });
 
-  test("It should response the GET method", (done) => {
+  test("It should respond with a 404 status code", (done) => {
     request(app)
       .get("/decode/123456")
       .then((response) => {
@@ -59,7 +59,7 @@ describe("Test the decode path", () => {
       });
   });
 
-  test("It should response the GET method", (done) => {
+  test("It should respond with a 200 status code", (done) => {
     request(app)
       .get(`/decode/${shortId}`)
       .then((response) => {
