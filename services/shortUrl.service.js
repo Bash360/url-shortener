@@ -14,14 +14,15 @@ const encode = [
 
       const originalURL = url;
       const randomChar = generateRandomChar();
-      const statistics = generateStatistics(originalURL, randomChar);
+        const shortUrl = `${req.protocol}://${req.get("host")}/${randomChar}`;
+      const statistics = generateStatistics(originalURL, shortUrl);
       const savedRandomChar = ShortUrlRepo.saveOne(
         originalURL,
         randomChar,
         statistics
       );
-      const baseUrl = `${req.protocol}://${req.get("host")}/`;
-      return res.status(201).json({ shortUrl: `${baseUrl}${savedRandomChar}` });
+    
+      return res.status(201).json({ shortUrl });
     } catch (err) {
       next(err);
     }
